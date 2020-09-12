@@ -30,7 +30,7 @@ namespace socialGame.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(IdentityUser _userData)
+        public async Task<IActionResult> Post(ApplicationUser _userData)
         {
 
             if (_userData != null && _userData.Email != null && _userData.PasswordHash != null)
@@ -73,7 +73,7 @@ namespace socialGame.API.Controllers
         private async Task<ApplicationUser> GetUser(string email, string password)
         {
 
-            return await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == password);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == password);
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace socialGame.BLL
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<Guid>
     {
         [PersonalData]
         [DisplayName("First Name")]

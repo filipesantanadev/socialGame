@@ -31,7 +31,8 @@ namespace socialGame.WEB
                     Configuration.GetConnectionString("DatabaseConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<socialGameDBContext>();
+                .AddEntityFrameworkStores<socialGameDBContext>()
+                .AddDefaultUI();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -68,7 +69,7 @@ namespace socialGame.WEB
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Posts}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

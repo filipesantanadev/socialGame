@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -11,15 +12,16 @@ using socialGame.BLL;
 
 namespace socialGame.DAL
 {
-    public class socialGameDBContext : IdentityDbContext<ApplicationUser>
+    public class socialGameDBContext 
+        : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public socialGameDBContext(DbContextOptions<socialGameDBContext> options)
             : base(options)
         {
         }
-
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+                
         public DbSet<Post> Posts { get; set; }
+        /*public DbSet<Friendship> Friendships { get; set; }*/
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
