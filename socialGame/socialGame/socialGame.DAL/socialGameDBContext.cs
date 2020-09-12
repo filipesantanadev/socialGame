@@ -11,36 +11,37 @@ using socialGame.BLL;
 
 namespace socialGame.DAL
 {
-    public class socialGameDBContext : IdentityDbContext<User>
+    public class socialGameDBContext : IdentityDbContext<ApplicationUser>
     {
         public socialGameDBContext(DbContextOptions<socialGameDBContext> options)
             : base(options)
         {
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Post> Posts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().ToTable("User");
-            /*modelBuilder.Entity<Amizade>().ToTable("Amizade");
+            modelBuilder.Entity<ApplicationUser>().ToTable("User");
+            /*modelBuilder.Entity<Friendship>().ToTable("Friendship");
 
-            modelBuilder.Entity<Amizade>()
-                .HasKey(a => new { a.UsuarioIdA, a.UsuarioIdB });
+            modelBuilder.Entity<Friendship>()
+                .HasKey(a => new { a.UserIdA, a.UserIdB });
 
-            modelBuilder.Entity<Amizade>()
-                .HasOne(a => a.UsuarioA)
-                .WithMany(u => u.AmizadesA)
-                .HasForeignKey(a => a.UsuarioIdA)
+            modelBuilder.Entity<Friendship>()
+                .HasOne(a => a.UserA)
+                .WithMany(u => u.FriendshipA)
+                .HasForeignKey(a => a.UserIdA)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Amizade>()
-                .HasOne(a => a.UsuarioB)
-                .WithMany(u => u.AmizadesB)
-                .HasForeignKey(a => a.UsuarioIdB)
+            modelBuilder.Entity<Friendship>()
+                .HasOne(a => a.UserB)
+                .WithMany(u => u.FriendshipB)
+                .HasForeignKey(a => a.UserIdB)
                 .OnDelete(DeleteBehavior.Restrict);*/
         }
 

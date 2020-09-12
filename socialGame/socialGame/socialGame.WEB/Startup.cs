@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -5,8 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using socialGame.BLL;
 using socialGame.DAL;
+using System;
+using System.Text;
 
 namespace socialGame.WEB
 {
@@ -21,21 +25,20 @@ namespace socialGame.WEB
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
+        {             
+            services.AddDbContext<socialGameDBContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DatabaseConnection")));
 
-            /*services.AddIdentity<User, IdentityUser>().AddEntityFrameworkStores<socialGameDBContext>();*/
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<socialGameDBContext>();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
-            var connection = Configuration.GetConnectionString("DatabaseConnection");
-            services.AddDbContext<socialGameDBContext>(options => options.UseSqlServer(connection));
-
-            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            /*services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<socialGameDBContext>()
                 .AddDefaultUI()
-                .AddDefaultTokenProviders();
-
-            services.AddControllersWithViews();
-            services.AddRazorPages();          
+                .AddDefaultTokenProviders();*/            
 
         }
 

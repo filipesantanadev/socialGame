@@ -30,12 +30,12 @@ namespace socialGame.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(User _userData)
+        public async Task<IActionResult> Post(IdentityUser _userData)
         {
 
-            if (_userData != null && _userData.Email != null && _userData.Password != null)
+            if (_userData != null && _userData.Email != null && _userData.PasswordHash != null)
             {
-                var user = await GetUser(_userData.Email, _userData.Password);
+                var user = await GetUser(_userData.Email, _userData.PasswordHash);
 
                 if (user != null)
                 {
@@ -44,8 +44,10 @@ namespace socialGame.API.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                    new Claim("Id", user.Id.ToString()),
+                    new Claim("FirstName", user.FirstName),
+                    new Claim("LastName", user.LastName),
                     new Claim("UserName", user.UserName),
-                    new Claim("Password", user.Password),
                     new Claim("Email", user.Email)
                    };
 
@@ -68,9 +70,10 @@ namespace socialGame.API.Controllers
             }
         }
 
-        private async Task<User> GetUser(string email, string password)
+        private async Task<ApplicationUser> GetUser(string email, string password)
         {
-            return await _context.User.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+
+            return await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == password);
         }
     }
 }
