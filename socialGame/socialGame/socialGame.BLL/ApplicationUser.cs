@@ -25,8 +25,8 @@ namespace socialGame.BLL
         [DisplayName("Birth Date")]
         public DateTime BirthDate { get; set; }
 
-        /*public ICollection<Friendship> FriendshipA { get; set; }
-        public ICollection<Friendship> FriendshipB { get; set; }*/
+        public ICollection<Friendship> FriendshipA { get; set; }
+        public ICollection<Friendship> FriendshipB { get; set; }
 
         /*[Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the Terms")]
         public bool TermsAccepted { get; set; }*/

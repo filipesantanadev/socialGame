@@ -21,7 +21,7 @@ namespace socialGame.DAL
         }
                 
         public DbSet<Post> Posts { get; set; }
-        /*public DbSet<Friendship> Friendships { get; set; }*/
+        public DbSet<Friendship> Friendships { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,7 +29,7 @@ namespace socialGame.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>().ToTable("User");
-            /*modelBuilder.Entity<Friendship>().ToTable("Friendship");
+            modelBuilder.Entity<Friendship>().ToTable("Friendship");
 
             modelBuilder.Entity<Friendship>()
                 .HasKey(a => new { a.UserIdA, a.UserIdB });
@@ -44,7 +44,7 @@ namespace socialGame.DAL
                 .HasOne(a => a.UserB)
                 .WithMany(u => u.FriendshipB)
                 .HasForeignKey(a => a.UserIdB)
-                .OnDelete(DeleteBehavior.Restrict);*/
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<socialGameDBContext>
