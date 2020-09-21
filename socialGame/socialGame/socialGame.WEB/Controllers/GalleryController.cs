@@ -12,10 +12,10 @@ using socialGame.BLL;
 
 namespace socialGame.WEB.Controllers
 {
-    public class DemoController : Controller
+    public class GalleryController : Controller
     {
         private readonly IConfiguration _configuration;
-        public DemoController(IConfiguration configuration)
+        public GalleryController(IConfiguration configuration)
         {
             _configuration = configuration;
         }

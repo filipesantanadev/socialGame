@@ -69,7 +69,7 @@ namespace socialGame.WEB
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Posts}/{action=Index}/{id?}");
+                    pattern: "{controller=home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
