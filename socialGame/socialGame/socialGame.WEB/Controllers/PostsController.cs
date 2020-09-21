@@ -22,7 +22,8 @@ namespace socialGame.WEB.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Posts.ToListAsync());
+            var socialGameDBContext = _context.Posts.OrderByDescending(p => p.PublishDateTime);
+            return View(await socialGameDBContext.ToListAsync());
         }
 
         // GET: Posts/Details/5
